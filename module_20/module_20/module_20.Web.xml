@@ -1,0 +1,1155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>module_20.Web</name>
+    </assembly>
+    <members>
+        <member name="T:module_20.Web.Controllers.CourseController">
+            <summary>
+            Controller to work with course
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.#ctor(module_20.BLL.Interfaces.ICourseService,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{module_20.Web.Controllers.CourseController})">
+            <summary>
+            Constructor with specified ICourseService, IMapper, ILogger
+            </summary>
+            <param name="courseService">Object that realize course service contract</param>
+            <param name="mapper">Object that realize mapper contract</param>
+            <param name="logger">Object that realize logger contract</param>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.GetAllCourses">
+            <summary>
+            Get all courses
+            </summary>
+            <returns>Collection of courses</returns>
+            <response code="200">Returns courses collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.GetAllWithStudents">
+            <summary>
+            Get all courses with students
+            </summary>
+            <returns>Collection of courses with students</returns>
+            <response code="200">Returns courses collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.GetAllWithLecturer">
+            <summary>
+            Get all courses with lecturer
+            </summary>
+            <returns>Collection of courses with lecturer</returns>
+            <response code="200">Returns courses collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.GetCourseById(System.Int32)">
+            <summary>
+            Get course by id
+            </summary>
+            <param name="id">Course Id</param>
+            <returns>Course object</returns>
+            <response code="200">Returns course object</response>
+            <response code="404">If course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.GetCourseWithStudentsById(System.Int32)">
+            <summary>
+            Get course with students by id
+            </summary>
+            <param name="id">Course Id</param>
+            <returns>Course object with students collection</returns>
+            <response code="200">Returns course object</response>
+            <response code="404">If course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.GetCourseWithLecturerById(System.Int32)">
+            <summary>
+            Get course with lecturer by id
+            </summary>
+            <param name="id">Course Id</param>
+            <returns>Course object with lecturer object</returns>
+            <response code="200">Returns course object</response>
+            <response code="404">If course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.CreateCourse(module_20.Web.Resources.SaveCourseResource)">
+            <summary>
+            Create a new course
+            </summary>
+            <param name="saveCourseResource">Information need to create a new course</param>
+            <returns>A newly create course</returns>
+            <remarks>Validation rules:
+            1. Course isn't empty and maximum length = 150
+            2. Lecturer id isn't empty and greater than 0</remarks>
+            <response code="200">Returns the newly created item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.UpdateCourse(System.Int32,module_20.Web.Resources.SaveCourseResource)">
+            <summary>
+            Update a existing course
+            </summary>
+            <param name="id">Updated course id</param>
+            <param name="saveCourseResource">Information need to update a course object</param>
+            <returns>A updated course</returns>
+             <remarks>Validation rules:
+            1. Course isn't empty and maximum length = 150
+            2. Lecturer id isn't empty and greater than 0</remarks>
+            <response code="200">Returns the updated course</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+            <response code="404">If course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.AddStudentToCourse(System.Int32,System.Int32)">
+            <summary>
+            Add new student to course
+            </summary>
+            <param name="courseId">Course Id</param>
+            <param name="studentId">Student Id</param>
+            <returns>A updated course with students</returns>
+            <response code="200">Returns the updated course</response>
+            <response code="409">If the student already study in course</response> 
+            <response code="404">If the student or course with that id doesn't exist in database</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.CourseController.DeleteCourse(System.Int32)">
+            <summary>
+            Delete a course
+            </summary>
+            <param name="id">The course that need to delete</param>
+            <returns></returns>
+            <response code="204">Course is successfully deleted</response>
+            <response code="404">Course with that id doesn't exist in database</response>
+        </member>
+        <member name="T:module_20.Web.Controllers.HomeworkController">
+            <summary>
+            Controller to work with homework
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.#ctor(module_20.BLL.Interfaces.IHomeworkService,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{module_20.Web.Controllers.HomeworkController})">
+            <summary>
+            Constructor with specified ICourseService, IMapper, ILogger
+            </summary>
+            <param name="homeworkService">Object that realize homework service contract</param>
+            <param name="mapper">Object that realize mapper contract</param>
+            <param name="logger">Object that realize logger contract</param>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.GetAllHomeworks">
+            <summary>
+            Get all homeworks with student and lecture
+            </summary>
+            <returns>Collection of homeworks</returns>
+            <response code="200">Returns homeworks collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.GetHomeworkById(System.Int32)">
+            <summary>
+            Get homework with student and lecture by id
+            </summary>
+            <param name="id">Homework Id</param>
+            <returns>Homework object</returns>
+            <response code="200">Returns homework object</response>
+            <response code="404">If homework with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.GetHomeworksByLectureId(System.Int32)">
+            <summary>
+            Get all homeworks of lecture
+            </summary>
+            <param name="lectureId">Lecture id</param>
+            <returns>Collection of homeworks with student</returns>
+            <response code="200">Returns homeworks collection</response>
+            <response code="404">Lecture with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.GetAllHomeworksByStudentId(System.Int32)">
+            <summary>
+            Get all homeworks of student
+            </summary>
+            <param name="studentId">Student id</param>
+            <returns>Collection of homeworks with lecture</returns>
+            <response code="200">Returns homeworks collection</response>
+            <response code="404">Student with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.GetAllHomeworksByCourseId(System.Int32)">
+            <summary>
+            Get all homeworks of course
+            </summary>
+            <param name="courseId">Course id</param>
+            <returns>Collection of homeworks with lecture and student</returns>
+            <response code="200">Returns homeworks collection</response>
+            <response code="404">Course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.GetAllHomeworksByCourseIdAndStudentId(System.Int32,System.Int32)">
+            <summary>
+            Get all homeworks of student at certain course
+            </summary>
+            <param name="courseId">Course id</param>
+            <param name="studentId">Student id</param>
+            <returns>Collection of homeworks with lecture</returns>
+            <response code="200">Returns homeworks collection</response>
+            <response code="404">Course or Student with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.CreateHomework(module_20.Web.Resources.SaveHomeworkResource)">
+            <summary>
+            Create a new homework
+            </summary>
+            <param name="saveHomeworkResource">Information need to create a new homework</param>
+            <returns>A newly create homework</returns>
+            <remarks>Validation rules:
+            1. Mark is greater or equal than 0
+            2. Lecture id isn't empty and greater than 0
+            3. Student id isn't empty and greater than 0
+            4. Task isn't empty </remarks>
+            <response code="200">Returns the newly created item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.UpdateHomework(System.Int32,module_20.Web.Resources.SaveHomeworkResource)">
+            <summary>
+            Update a existing homework
+            </summary>
+            <param name="id">Updated homework id</param>
+            <param name="saveHomeworkResource">Information need to update homework</param>
+            <returns>A updated homework</returns>
+            <remarks>Validation rules:
+            1. Mark is greater or equal than 0
+            2. Lecture id isn't empty and greater than 0
+            3. Student id isn't empty and greater than 0
+            4. Task isn't empty </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+            <response code="404">If course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.SetMarkToHomeworks(System.Collections.Generic.IEnumerable{module_20.Web.Resources.SetMarkHomeworkResource})">
+            <summary>
+            Set mark to homeworks
+            </summary>
+            <param name="marks">Collection with homework id and mark</param>
+            <returns>A updated homeworks</returns>
+            <remarks> For test a business logic with send message to mobile about average student grade, set any mark to homework with id 5, and check logger
+            </remarks>
+            <response code="200">Returns the updated items</response>
+            <response code="404">If course with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.HomeworkController.DeleteHomework(System.Int32)">
+            <summary>
+            Delete a homework
+            </summary>
+            <param name="id">The homework that need to delete</param>
+            <returns></returns>
+            <response code="204">Homework is successfully deleted</response>
+            <response code="404">Homework with that id doesn't exist in database</response>
+        </member>
+        <member name="T:module_20.Web.Controllers.LectureController">
+            <summary>
+            Controller to work with lecture
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.#ctor(module_20.BLL.Interfaces.ILectureService,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{module_20.Web.Controllers.LectureController})">
+            <summary>
+            Constructor with specified ICourseService, IMapper, ILogger
+            </summary>
+            <param name="lectureService">Object that realize lecture service contract</param>
+            <param name="mapper">Object that realize mapper contract</param>
+            <param name="logger">Object that realize logger contract</param>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.GetAllLectures">
+            <summary>
+            Get all lectures with course
+            </summary>
+            <returns>Collection of lectures</returns>
+            <response code="200">Returns lectures collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.GetLectureById(System.Int32)">
+            <summary>
+            Get lecture with course by id
+            </summary>
+            <param name="id">Lecture Id</param>
+            <returns>Lecture object</returns>
+            <response code="200">Returns lecture object</response>
+            <response code="404">If lecture with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.GetAttendanceOfLectureByName(System.String)">
+            <summary>
+            Get attendance of lecture by lecture name
+            </summary>
+            <param name="lectureName">Lecture name</param>
+            <returns>Attendance of lecture</returns>
+            <remarks>
+            Available two output formats: txt and json.
+            For txt format put "txt". For json put "json"
+            </remarks>
+            <response code="200">Returns attendance collection</response>
+            <response code="404">If lecture with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.CreateLecture(module_20.Web.Resources.SaveLectureResource)">
+            <summary>
+            Create a new lecture, as a default students at lecture have a false attendance
+            </summary>
+            <param name="saveLectureResource">Information need to create a new lecture</param>
+            <returns>A newly create lecture</returns>
+            <remarks>Validation rules:
+            1. Name isn't empty and maximum length = 150
+            2. Date isn't empty
+            3. Course id isn't empty and greater than 0 </remarks>
+            <response code="200">Returns the newly created item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.AddHomeworkToLecture(System.Int32,System.String)">
+            <summary>
+            Add homework to all student at course of lecture
+            </summary>
+            <param name="lectureId">Lecture Id</param>
+            <param name="task">Task of homework</param>
+            <returns>Collection of newly created homeworks</returns>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.MarkAttendance(System.Int32,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Mark attendance at lecture, as a default students have a false attendance
+            </summary>
+            <param name="lectureId">Lecture Id</param>
+            <param name="studentIds">Collection of student ids that was at lecture</param>
+            <returns>The update attendance</returns>
+            <remarks> For test a business logic with send message to email about lectures missed, create two new lectures at course with id 1, and don't mark student with id 2, and check logger.
+            </remarks>
+            <response code="200">Returns the updated attendance</response>
+            <response code="404">If the lecture with that id doesn't exist in database</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.MarkAbsence(System.Int32,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Mark absence at lecture, this method need to fix your mistake as a default attendance in lecture is false
+            </summary>
+            <param name="lectureId">Lecture Id</param>
+            <param name="studentIds">Collection of student ids that wasn't at lecture</param>
+            <returns>The updated attendance</returns>
+            <response code="200">Returns the updated attendance</response>
+            <response code="404">If the lecture with that id doesn't exist in database</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.UpdateLecture(System.Int32,module_20.Web.Resources.SaveLectureResource)">
+            <summary>
+            Update a existing lecture
+            </summary>
+            <param name="id">Updated lecture id</param>
+            <param name="saveLectureResource">Information need to update lecture</param>
+            <returns>A updated lecture</returns>
+            <remarks>Validation rules:
+            1. Name isn't empty and maximum length = 150
+            2. Date isn't empty
+            3. Course id isn't empty and greater than 0 </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+            <response code="404">If lecture with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LectureController.DeleteLecture(System.Int32)">
+            <summary>
+            Delete a lecture
+            </summary>
+            <param name="id">The lecture that need to delete</param>
+            <returns></returns>
+            <response code="204">Lecture is successfully deleted</response>
+            <response code="404">Lecture with that id doesn't exist in database</response>
+        </member>
+        <member name="T:module_20.Web.Controllers.LecturerController">
+            <summary>
+            Controller to work with lecturer
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.#ctor(module_20.BLL.Interfaces.ILecturerService,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{module_20.Web.Controllers.LecturerController})">
+            <summary>
+            Constructor with specified ICourseService, IMapper, ILogger
+            </summary>
+            <param name="lecturerService">Object that realize lecturer service contract</param>
+            <param name="mapper">Object that realize mapper contract</param>
+            <param name="logger">Object that realize logger contract</param>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.GetAllLecturers">
+            <summary>
+            Get all lecturers
+            </summary>
+            <returns>Collection of lecturers</returns>
+            <response code="200">Returns lecturers collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.GetAllLecturersWithCourses">
+            <summary>
+            Get all lecturers with courses
+            </summary>
+            <returns>Collection of lecturers with courses</returns>
+            <response code="200">Returns lecturers collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.GetLecturerById(System.Int32)">
+            <summary>
+            Get lecturer with by id
+            </summary>
+            <param name="id">Lecturer Id</param>
+            <returns>Lecturer object</returns>
+            <response code="200">Returns lecturer object</response>
+            <response code="404">If lecturer with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.GetLecturerWithCourseById(System.Int32)">
+            <summary>
+            Get lecturer with courses with by id
+            </summary>
+            <param name="id">Lecturer Id</param>
+            <returns>Lecturer with courses object</returns>
+            <response code="200">Returns lecturer object</response>
+            <response code="404">If lecturer with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.CreateLecturer(module_20.Web.Resources.SaveLecturerResource)">
+            <summary>
+            Create a new lecturer
+            </summary>
+            <param name="saveLecturerResource">Information need to create a new lecturer</param>
+            <returns>A newly create lecturer</returns>
+            <remarks>Validation rules:
+            1. Name isn't empty and maximum length = 150
+            2. Email isn't empty
+            3. Mobile isn't empty and has +X (XXX) XXX-XX-XX format</remarks>
+            <response code="200">Returns the newly created item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.UpdateLecturer(System.Int32,module_20.Web.Resources.SaveLecturerResource)">
+            <summary>
+            Update a existing lecturer
+            </summary>
+            <param name="id">Updated lecturer id</param>
+            <param name="saveLecturerResource">Information need to update lecturer</param>
+            <returns>A updated lecturer</returns>
+            <remarks>Validation rules:
+            1. Name isn't empty and maximum length = 150
+            2. Email isn't empty
+            3. Mobile isn't empty and has +X (XXX) XXX-XX-XX format</remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+            <response code="404">If lecturer with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.LecturerController.DeleteLecturer(System.Int32)">
+            <summary>
+            Delete a lecturer
+            </summary>
+            <param name="id">The lecturer that need to delete</param>
+            <returns></returns>
+            <response code="204">Lecturer is successfully deleted</response>
+            <response code="404">Lecturer with that id doesn't exist in database</response>
+        </member>
+        <member name="T:module_20.Web.Controllers.StudentController">
+            <summary>
+            Controller to work with student
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.#ctor(module_20.BLL.Interfaces.IStudentService,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{module_20.Web.Controllers.StudentController})">
+            <summary>
+            Constructor with specified ICourseService, IMapper, ILogger
+            </summary>
+            <param name="studentService">Object that realize lecture service contract</param>
+            <param name="mapper">Object that realize mapper contract</param>
+            <param name="logger">Object that realize logger contract</param>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.GetAllStudents">
+            <summary>
+            Get all students
+            </summary>
+            <returns>Collection of students</returns>
+            <response code="200">Returns students collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.GetAllStudentsWithCourse">
+            <summary>
+            Get all students with courses
+            </summary>
+            <returns>Collection of students with courses</returns>
+            <response code="200">Returns students collection</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.GetStudentById(System.Int32)">
+            <summary>
+            Get student by id
+            </summary>
+            <param name="id">Student Id</param>
+            <returns>Student object</returns>
+            <response code="200">Returns student object</response>
+            <response code="404">If student with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.GetStudentWithCoursesById(System.Int32)">
+            <summary>
+            Get student with courses by id
+            </summary>
+            <param name="id">Student Id</param>
+            <returns>Student with courses object</returns>
+            <response code="200">Returns student object</response>
+            <response code="404">If student with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.GetAttendanceOfStudentByName(System.String)">
+            <summary>
+            Get attendance of student by student name
+            </summary>
+            <param name="studentName">Student name</param>
+            <returns>Attendance of student</returns>
+            <remarks>
+            Available two output formats: txt and json.
+            For txt format put "txt". For json put "json"
+            </remarks>
+            <response code="200">Returns attendance collection</response>
+            <response code="404">If student with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.CreateStudent(module_20.Web.Resources.SaveStudentResource)">
+            <summary>
+            Create a new student
+            </summary>
+            <param name="saveStudentResource">Information need to create a new lecture</param>
+            <returns>A newly create lecture</returns>
+            <remarks>Validation rules:
+            1. Name isn't empty and maximum length = 150
+            2. Email isn't empty
+            3. Mobile isn't empty and has +X (XXX) XXX-XX-XX format</remarks>
+            <response code="200">Returns the newly created item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.UpdateStudent(System.Int32,module_20.Web.Resources.SaveStudentResource)">
+            <summary>
+            Update a existing student
+            </summary>
+            <param name="id">Updated student id</param>
+            <param name="saveStudentResource">Information need to update student</param>
+            <returns>A updated student</returns>
+            <remarks>Validation rules:
+            1. Name isn't empty and maximum length = 150
+            2. Email isn't empty
+            3. Mobile isn't empty and has +X (XXX) XXX-XX-XX format</remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null or validation isn't valid</response> 
+            <response code="404">If student with that id doesn't exist in database</response>
+        </member>
+        <member name="M:module_20.Web.Controllers.StudentController.DeleteStudent(System.Int32)">
+            <summary>
+            Delete a student
+            </summary>
+            <param name="id">The student that need to delete</param>
+            <returns></returns>
+            <response code="204">Student is successfully deleted</response>
+            <response code="404">Student with that id doesn't exist in database</response>
+        </member>
+        <member name="T:module_20.Web.Extensions.AddServicesExtension">
+            <summary>
+            Class that contains add's services extension
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Extensions.AddServicesExtension.AddBLLServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add business logic services
+            </summary>
+            <param name="services">Services of api</param>
+        </member>
+        <member name="M:module_20.Web.Extensions.AddServicesExtension.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add swagger
+            </summary>
+            <param name="services">Services of api</param>
+        </member>
+        <member name="M:module_20.Web.Extensions.AddServicesExtension.AddMVCServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add MVC services
+            </summary>
+            <param name="services">Services of api</param>
+        </member>
+        <member name="M:module_20.Web.Extensions.AddServicesExtension.AddControllerServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add controller services
+            </summary>
+            <param name="services">Services of api</param>
+        </member>
+        <member name="T:module_20.Web.Extensions.SetUpConnectionExtension">
+            <summary>
+            Class that contains connection's extensions
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Extensions.SetUpConnectionExtension.SetUpSqlServer(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Set Up connection to sql server
+            </summary>
+            <param name="services">Services of api</param>
+            <param name="connectionString">Connection string</param>
+        </member>
+        <member name="T:module_20.Web.Filters.ErrorResponseFilter">
+            <summary>
+            Class that realize exception filter
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Filters.ErrorResponseFilter.#ctor(Microsoft.Extensions.Logging.ILogger{module_20.Web.Filters.ErrorResponseFilter})">
+            <summary>
+            Constructor with specefied logger
+            </summary>
+            <param name="logger">Logger</param>
+        </member>
+        <member name="M:module_20.Web.Filters.ErrorResponseFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            Action when application throw exception
+            </summary>
+            <param name="context">Exception context</param>
+        </member>
+        <member name="T:module_20.Web.Formatters.TxtOutputAttendanceFormatter">
+            <summary>
+            Class thath realize txt output format
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Formatters.TxtOutputAttendanceFormatter.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Formatters.TxtOutputAttendanceFormatter.CanWriteType(System.Type)">
+            <summary>
+            Checks whether type's output to txt
+            </summary>
+            <param name="type">Type of object</param>
+        </member>
+        <member name="M:module_20.Web.Formatters.TxtOutputAttendanceFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)">
+            <summary>
+            Output context to txt format
+            </summary>
+            <param name="context">Context</param>
+            <param name="selectedEncoding">Encoding</param>
+            <returns>Http response with result</returns>
+        </member>
+        <member name="T:module_20.Web.Mapping.AttendanceProfile">
+            <summary>
+            AutoMapper profile for attendance
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Mapping.AttendanceProfile.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Mapping.CourseProfile">
+            <summary>
+            AutoMapper profile for course
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Mapping.CourseProfile.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Mapping.HomeworkProfile">
+            <summary>
+            AutoMapper profile for homework
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Mapping.HomeworkProfile.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Mapping.LectureProfile">
+            <summary>
+            AutoMapper profile for lecture
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Mapping.LectureProfile.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Mapping.LecturerProfile">
+            <summary>
+            AutoMapper profile for lecturer
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Mapping.LecturerProfile.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Mapping.StudentProfile">
+            <summary>
+            AutoMapper profile for student
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Mapping.StudentProfile.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.AttendanceOfLectureResource">
+            <summary>
+            Mapper resource with student and attendance for StudentLecture model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.AttendanceOfLectureResource.Student">
+            <summary>
+            Student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.AttendanceOfLectureResource.Attendance">
+            <summary>
+            Attendance of student
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.AttendanceOfStudentResource">
+            <summary>
+            Mapper resource with student and attendance for StudentLecture model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.AttendanceOfStudentResource.Lecture">
+            <summary>
+            Lecture
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.AttendanceOfStudentResource.Attendance">
+            <summary>
+            Attendance of lecture
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.CourseResource">
+            <summary>
+            Mapper resource with id and name for Course model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseResource.Name">
+            <summary>
+            Name of course
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.CourseWithLecturerResource">
+            <summary>
+            Mapper resource with id,name,lecturer for Course model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseWithLecturerResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseWithLecturerResource.Name">
+            <summary>
+            Name of course
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseWithLecturerResource.Lecturer">
+            <summary>
+            Lecturer of course
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.CourseWithStudentsResource">
+            <summary>
+            Mapper resource with id, name, students for Course model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseWithStudentsResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseWithStudentsResource.Name">
+            <summary>
+            Name of student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.CourseWithStudentsResource.Students">
+            <summary>
+            Students of course
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.SaveCourseResource">
+            <summary>
+            Mapper resource for creating object of Course model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveCourseResource.Name">
+            <summary>
+            Name of course
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveCourseResource.LecturerId">
+            <summary>
+            Lecturer Id
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.HomeworkWithLectureResource">
+            <summary>
+            Mapper resource with id, mark, task, lecture for Homework model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithLectureResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithLectureResource.Mark">
+            <summary>
+            Mark
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithLectureResource.Task">
+            <summary>
+            Task of homework
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithLectureResource.Lecture">
+            <summary>
+            Lecture
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.HomeworkWithStudentsAndLectureResource">
+            <summary>
+            Mapper resource with id, mark, task, lecture, student for Homework model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithStudentsAndLectureResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithStudentsAndLectureResource.Mark">
+            <summary>
+            Mark
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithStudentsAndLectureResource.Task">
+            <summary>
+            Task of homework
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithStudentsAndLectureResource.Student">
+            <summary>
+            Student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWithStudentsAndLectureResource.Lecture">
+            <summary>
+            Lecture
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.HomeworkWitnStudentsResource">
+            <summary>
+            Mapper resource with id, mark, task, student for Homework model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWitnStudentsResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWitnStudentsResource.Mark">
+            <summary>
+            Mark
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWitnStudentsResource.Task">
+            <summary>
+            Task
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.HomeworkWitnStudentsResource.Student">
+            <summary>
+            Student
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.SaveHomeworkResource">
+            <summary>
+            Mapper resource for creating a object of Homework model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveHomeworkResource.Mark">
+            <summary>
+            Mark
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveHomeworkResource.Task">
+            <summary>
+            Task
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveHomeworkResource.StudentId">
+            <summary>
+            Student Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveHomeworkResource.LectureId">
+            <summary>
+            Lecture Id
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.SetMarkHomeworkResource">
+            <summary>
+            Mapper resource with id, mark for Homework model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SetMarkHomeworkResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SetMarkHomeworkResource.Mark">
+            <summary>
+            Mark
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.LecturerResource">
+            <summary>
+            Mapper resource with id, name, email, mobile for lecturer model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerResource.Name">
+            <summary>
+            Name of lecturer
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerResource.Email">
+            <summary>
+            Email of lecturer
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerResource.Mobile">
+            <summary>
+            Mobile of lecturer
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.LecturerWithCourseResource">
+            <summary>
+            Mapper resource with id, name, courses for lecturer model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerWithCourseResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerWithCourseResource.Name">
+            <summary>
+            Name of lecturer
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LecturerWithCourseResource.Courses">
+            <summary>
+            Course of lecturer
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.SaveLecturerResource">
+            <summary>
+            Mapper resource for creating a object of lecturer model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveLecturerResource.Name">
+            <summary>
+            Name of lecturer
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveLecturerResource.Email">
+            <summary>
+            Email of lecturer
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveLecturerResource.Mobile">
+            <summary>
+            Mobile of lecturer
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.LectureResource">
+            <summary>
+            Mapper resource with id, name, date for lecture model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureResource.Name">
+            <summary>
+            Name of lecture
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureResource.Date">
+            <summary>
+            Date of lecture
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.LectureWithCourseResource">
+            <summary>
+            Mapper resource with id, name, date, course for lecture model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureWithCourseResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureWithCourseResource.Name">
+            <summary>
+            Name of lecture
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureWithCourseResource.Date">
+            <summary>
+            Date of lecture
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.LectureWithCourseResource.Course">
+            <summary>
+            Course of lecture
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.SaveLectureResource">
+            <summary>
+            Mapper resource for creating a object of lecture model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveLectureResource.Name">
+            <summary>
+            Name of lecture
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveLectureResource.Date">
+            <summary>
+            Date of lecture
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveLectureResource.CourseId">
+            <summary>
+            Course Id
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.SaveStudentResource">
+            <summary>
+            Mapper resource for creating a object of student model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveStudentResource.Name">
+            <summary>
+            Name of student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveStudentResource.Email">
+            <summary>
+            Email of student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.SaveStudentResource.Mobile">
+            <summary>
+            Mobile of student
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.StudentResource">
+            <summary>
+            Mapper resource with id, name, email, mobile for student model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentResource.Name">
+            <summary>
+            Name of student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentResource.Email">
+            <summary>
+            Email of student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentResource.Mobile">
+            <summary>
+            Mobile of student
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.StudentWithCoursesResource">
+            <summary>
+            Mapper resource with id, name, courses for student model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentWithCoursesResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentWithCoursesResource.Name">
+            <summary>
+            Name of student
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentWithCoursesResource.Courses">
+            <summary>
+            Courses of student
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Resources.StudentWithNameOnlyResource">
+            <summary>
+            Mapper resource with id, name for student model
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentWithNameOnlyResource.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:module_20.Web.Resources.StudentWithNameOnlyResource.Name">
+            <summary>
+            Name of student
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Validators.SaveCourseResourceValidator">
+            <summary>
+            Validator for SaveCourseResource class
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Validators.SaveCourseResourceValidator.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Validators.SaveHomeworkResourceValidator">
+            <summary>
+            Validator for SaveHomeworkResource class
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Validators.SaveHomeworkResourceValidator.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Validators.SaveLectureResourceValidator">
+            <summary>
+            Validator for SaveLectureResource class
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Validators.SaveLectureResourceValidator.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Validators.SaveLecturerResourceValidator">
+            <summary>
+            Validator for SaveLecturerResource class
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Validators.SaveLecturerResourceValidator.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="T:module_20.Web.Validators.SaveStudentResourceValidator">
+            <summary>
+            Validator for SaveStudentResource class
+            </summary>
+        </member>
+        <member name="M:module_20.Web.Validators.SaveStudentResourceValidator.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+    </members>
+</doc>
